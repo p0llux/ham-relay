@@ -1,0 +1,13 @@
+*~
+*.o
+*.a
+*.bin
+*.elf
+*.map
+*.lst
+*.hex
+Makefile
+CMakeFiles/
+CMakeCache.txt
+*.cmake
+
