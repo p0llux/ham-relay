@@ -106,9 +106,9 @@ function(add_nxp_executable TARGET_NAME SOURCES)
 
   get_target_property(TEMP ${TARGET_NAME} LINK_FLAGS)
   if(TEMP STREQUAL "TEMP-NOTFOUND")
-    SET(TEMP "-Tlpc11c24.ld")
+    SET(TEMP "-Tlpc1114.ld")
   else()
-    SET(TEMP "-Tlpc11c24.ld ${TEMP}" )
+    SET(TEMP "-Tlpc1114.ld ${TEMP}" )
   endif()
   set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS ${TEMP} )
 endfunction(add_nxp_executable)
@@ -125,4 +125,5 @@ link_directories (${PROJECT_SOURCE_DIR}/liblpc11)
 add_subdirectory (liblpc11)
 
 #add_subdirectory (src)
+add_subdirectory (tests)
 
