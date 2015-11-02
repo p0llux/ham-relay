@@ -1,16 +1,23 @@
 #ifndef __HAVE_CONFIG_H
 #define __HAVE_CONFIG_H
 
-#define LED_STATUS_PIO   IOCON_PIO2_4
-#define LED_STATUS_PORT  2
-#define LED_STATUS_PIN   4
+#define LED_STATUS_PIO     IOCON_PIO2_4
+#define LED_STATUS_PORT    2
+#define LED_STATUS_PIN     4
+#define LED_INVERTED_LOGIC true
 
-#define OUT_1KHZ_PIO     IOCON_PIO3_0
-#define OUT_1KHZ_PORT    3
-#define OUT_1KHZ_PIN     0
+#define OUT_1KHZ_PIO       IOCON_PIO3_0
+#define OUT_1KHZ_PORT      3
+#define OUT_1KHZ_PIN       0
 
-#define MIX_1KHZ_PIO     IOCON_PIO2_7
-#define MIX_1KHZ_PORT    2
-#define MIX_1KHZ_PIN     7
+#define MIX_1KHZ_PIO       IOCON_PIO2_7
+#define MIX_1KHZ_PORT      2
+#define MIX_1KHZ_PIN       7
+#define MIX_INVERTED_LOGIC true
+
+#define MORSE_SHORT_DURATION_MS 100
+#define MORSE_LONG_DURATION_MS  (MORSE_SHORT_DURATION_MS * 3)
+#define MORSE_PAUSE_DURATION_MS (MORSE_SHORT_DURATION_MS * 3)
+#define MORSE_SPACE_DURATION_MS (MORSE_SHORT_DURATION_MS * 7)
 
 #endif /* __HAVE_CONFIG_H */

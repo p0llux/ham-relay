@@ -18,11 +18,17 @@ main (void)
   DBG (DBG_LEVEL_INFO, "MCU running at %d MHz", SystemCoreClock / 1000000);
 
   systick_init ();
-  
+  mixer_init ();
+
   generate_1khz ();
 
   while (1) {
-    __WFI ();
+    volatile int i;
+
+    morse_send ("ON4WS", 5);
+    for (i = 0; i < 0x80000; i++);
+
+    //__WFI ();
   }
 
   return 0;
