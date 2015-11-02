@@ -1,9 +1,9 @@
-set (TARGET debug.elf)
+set (TARGET button.elf)
 
 set (CMAKE_AR arm-none-eabi-ar)
 
-set (SRC debug.c)
-set_property (SOURCE debug.c PROPERTY COMPILE_DEFINITIONS
+set (SRC button.c)
+set_property (SOURCE button.c PROPERTY COMPILE_DEFINITIONS
 	        __GIT_SHA1__=\"${GIT_SHA1_SHORT}\"
 	        __BUILD_HOSTNAME__=\"${BUILD_HOSTNAME}\")
 
