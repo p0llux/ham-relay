@@ -113,7 +113,7 @@ function(add_nxp_executable TARGET_NAME SOURCES)
   set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS ${TEMP} )
 endfunction(add_nxp_executable)
 
-set (COMMON_FLAGS "-DCORE_M0 -Os -mthumb -mcpu=cortex-m0 -msoft-float -mno-sched-prolog -ffunction-sections -fdata-sections -ggdb")
+set (COMMON_FLAGS "-DCORE_M0 -Os -mthumb -mcpu=cortex-m0 -msoft-float -mno-sched-prolog -ffunction-sections -fdata-sections -ggdb -Wall")
 set (CMAKE_C_FLAGS ${COMMON_FLAGS})
 set (CMAKE_EXE_LINKER_FLAGS "-Os -Wl,-gc-sections -Os -mthumb -mcpu=cortex-m0")
 
@@ -124,6 +124,6 @@ link_directories (${PROJECT_SOURCE_DIR}/liblpc11)
 
 add_subdirectory (liblpc11)
 
-#add_subdirectory (src)
+add_subdirectory (src)
 add_subdirectory (tests)
 
