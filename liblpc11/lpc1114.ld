@@ -5,7 +5,7 @@ GROUP(-lgcc -lc -lcs3 -lcs3unhosted)
 
 MEMORY
 {
-  ram  (rwx) : ORIGIN = 0x100000C0, LENGTH = 8K - 0xC0 /* reserve some space for CCAN ROM's RAM usage */
+  ram  (rwx) : ORIGIN = 0x10000000, LENGTH = 4K
   rom  (rx)  : ORIGIN = 0x00000000, LENGTH = 32K
 }
 

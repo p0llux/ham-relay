@@ -18,6 +18,7 @@ set (LIB_SRC
         src/pmu_11xx.c
         src/ring_buffer.c
         src/ssp_11xx.c
+	src/syscalls.c
         src/sysctl_11xx.c
         src/sysinit_11xx.c
         src/timer_11xx.c

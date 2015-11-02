@@ -27,6 +27,8 @@ void debug_write (char c);
 void debug_write_n_str (const char * str, int len) __attribute__ ((weak));
 void debug_flush ();
 
+int debug_get (char * dst, int offset, int len);
+int debug_len (void);
 #else
 
 #define debug_init()
@@ -37,6 +39,9 @@ void debug_flush ();
 #define debug_write(c)
 #define debug_write_n_str(s,l)
 #define debug_flush()
+
+#define debug_get(d,o,l)
+#define debug_len()
 
 #endif
 
