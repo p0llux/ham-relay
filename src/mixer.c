@@ -17,6 +17,12 @@ mixer_enable_1khz (uint32_t duration_ms)
   while (gSysTicks == start_systick);
 
   Chip_GPIO_SetPinState (LPC_GPIO, MIX_1KHZ_PORT, MIX_1KHZ_PIN, !MIX_INVERTED_LOGIC);
+
+  NVIC_ClearPendingIRQ (TIMER_16_0_IRQn);
+  NVIC_EnableIRQ (TIMER_16_0_IRQn);
   while (gSysTicks < (start_systick + 1 + (duration_ms / 10)));
+  NVIC_DisableIRQ (TIMER_16_0_IRQn);
+  Chip_GPIO_SetPinState (LPC_GPIO, OUT_1KHZ_PORT, OUT_1KHZ_PIN, false);
+
   Chip_GPIO_SetPinState (LPC_GPIO, MIX_1KHZ_PORT, MIX_1KHZ_PIN, MIX_INVERTED_LOGIC);
 }
