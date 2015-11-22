@@ -24,7 +24,7 @@ static const morse_char_t morse_alphabet[] = {
   {.length = 2, .code = 0b00},   /* I */
   {.length = 4, .code = 0b0111}, /* J */
   {.length = 3, .code = 0b101},  /* K */
-  {.length = 3, .code = 0b0100}, /* L */
+  {.length = 4, .code = 0b0100}, /* L */
   {.length = 2, .code = 0b11},   /* M */
   {.length = 2, .code = 0b10},   /* N */
   {.length = 3, .code = 0b111},  /* O */
@@ -142,7 +142,7 @@ send_digit (const unsigned char c)
 
     offset = c - '0';
     if (offset < 9) {
-      do_send_morse_char (&(morse_number[offset]));
+      do_send_morse_char (&(morse_number[offset - 1]));
     } else {
       DBG (DBG_LEVEL_ERROR, "Invalid digit '%c'", c);
       send_space ();
