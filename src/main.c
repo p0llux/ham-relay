@@ -32,9 +32,7 @@ main (void)
 
   systick_init ();
   tx_init ();
-  mixer_init ();
-
-  generate_1khz ();
+  tone_init ();
 
   while (1) {
     if (send_code) {
@@ -53,34 +51,6 @@ main (void)
   }
 
   return 0;
-}
-
-static void
-generate_1khz (void)
-{
-  Chip_IOCON_PinMuxSet (LPC_IOCON, TONE_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
-  Chip_GPIO_SetPinDIROutput (LPC_GPIO, TONE_PORT, TONE_PIN);
-  Chip_GPIO_SetPinState (LPC_GPIO, TONE_PORT, TONE_PIN, false);
-
-  Chip_TIMER_Init (LPC_TIMER16_0);
-  Chip_TIMER_Reset (LPC_TIMER16_0);
-  Chip_TIMER_MatchEnableInt (LPC_TIMER16_0, 0);
-  Chip_TIMER_SetMatch (LPC_TIMER16_0, 0, (Chip_Clock_GetSystemClockRate () / (SIGNAL_FREQ * 2)));
-  Chip_TIMER_ResetOnMatchEnable (LPC_TIMER16_0, 0);
-  Chip_TIMER_Enable (LPC_TIMER16_0);
-  Chip_GPIO_SetPinState (LPC_GPIO, TONE_PORT, TONE_PIN, false);
-  NVIC_ClearPendingIRQ (TIMER_16_0_IRQn);
-  NVIC_EnableIRQ (TIMER_16_0_IRQn);
-}
-
-void
-timer16_0_handler (void)
-{
-  if (Chip_TIMER_MatchPending (LPC_TIMER16_0, 0)) {
-    Chip_TIMER_ClearMatch (LPC_TIMER16_0, 0);
-
-    Chip_GPIO_SetPinToggle (LPC_GPIO, TONE_PORT, TONE_PIN);
-  }
 }
 
 void

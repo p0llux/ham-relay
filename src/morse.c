@@ -97,9 +97,9 @@ do_send_morse_char (const morse_char_t * c)
 
   for (pos = c->length; pos > 0; pos--) {
     if (c->code & (1 << (pos - 1))) {
-      mixer_enable_1khz (MORSE_LONG_DURATION_MS);
+      tone_enable_1khz (MORSE_LONG_DURATION_MS);
     } else {
-      mixer_enable_1khz (MORSE_SHORT_DURATION_MS);
+      tone_enable_1khz (MORSE_SHORT_DURATION_MS);
     }
 
     do_pause (MORSE_SHORT_DURATION_MS);

@@ -13,9 +13,9 @@ set_property (SOURCE main.c PROPERTY COMPILE_DEFINITIONS
 
 set (SRC
 	main.c
-	mixer.c
 	morse.c
 	systick.c
+	tone.c
 	tx.c
 	)
 
