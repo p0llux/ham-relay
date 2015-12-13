@@ -16,6 +16,7 @@ set (SRC
 	mixer.c
 	morse.c
 	systick.c
+	tx.c
 	)
 
 set (TARGET ham-relay.elf)
