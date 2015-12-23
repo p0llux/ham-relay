@@ -1,4 +1,4 @@
-update=mer 09 déc 2015 08:28:38 CET
+update=lun 21 déc 2015 11:01:03 CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -40,19 +40,9 @@ EquName11=/usr/share/kicad/modules/smd_resistor_0805.equ
 EquName12=/usr/share/kicad/modules/smd_resistor_1206.equ
 EquName13=/usr/share/kicad/modules/smd_trans-diodes.equ
 EquName14=/usr/share/kicad/modules/standard-trans-diodes.equ
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
 [eeschema]
 version=1
-LibDir=
+LibDir=/home/jfw/kicad/library
 [eeschema/libraries]
 LibName1=ham-relay-rescue
 LibName2=power
@@ -89,3 +79,15 @@ LibName32=SWD
 LibName33=JTAG
 LibName34=VCC2
 LibName35=testpoint
+LibName36=74xx-eu
+LibName37=resistor-bourns
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=/tmp
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=50
