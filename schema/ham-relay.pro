@@ -1,4 +1,4 @@
-update=jeu 24 déc 2015 20:19:57 CET
+update=ven 25 déc 2015 18:33:59 CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -20,8 +20,6 @@ SolderMaskMinWidth=0.000000000000
 DrawSegmentWidth=0.200000000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
-[general]
-version=1
 [cvpcb]
 version=1
 NetIExt=net
@@ -40,6 +38,18 @@ EquName11=/usr/share/kicad/modules/smd_resistor_0805.equ
 EquName12=/usr/share/kicad/modules/smd_resistor_1206.equ
 EquName13=/usr/share/kicad/modules/smd_trans-diodes.equ
 EquName14=/usr/share/kicad/modules/standard-trans-diodes.equ
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=/tmp
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=50
+[general]
+version=1
 [eeschema]
 version=1
 LibDir=/home/jfw/kicad/library
@@ -81,13 +91,4 @@ LibName34=VCC2
 LibName35=testpoint
 LibName36=74xx-eu
 LibName37=resistor-bourns
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=/tmp
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=50
+LibName38=7805
