@@ -80,7 +80,7 @@ U 1 1 56641987
 P 3700 1750
 F 0 "C6" H 3725 1850 50  0000 L CNN
 F 1 "100nF" H 3725 1650 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 3738 1600 30  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W2.5_P5" H 3738 1600 30  0001 C CNN
 F 3 "" H 3700 1750 60  0000 C CNN
 	1    3700 1750
 	1    0    0    -1  
@@ -91,7 +91,7 @@ U 1 1 56641B95
 P 3700 2700
 F 0 "C7" H 3725 2800 50  0000 L CNN
 F 1 "100nF" H 3725 2600 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 3738 2550 30  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W2.5_P5" H 3738 2550 30  0001 C CNN
 F 3 "" H 3700 2700 60  0000 C CNN
 	1    3700 2700
 	1    0    0    -1  
@@ -405,7 +405,7 @@ U 1 1 5665C653
 P 8050 5550
 F 0 "C8" H 8075 5650 50  0000 L CNN
 F 1 "10nF" H 8075 5450 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 8088 5400 30  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W2.5_P5" H 8088 5400 30  0001 C CNN
 F 3 "" H 8050 5550 60  0000 C CNN
 	1    8050 5550
 	1    0    0    -1  
@@ -552,7 +552,7 @@ U 1 1 5666330C
 P 10500 5450
 F 0 "C9" H 10525 5550 50  0000 L CNN
 F 1 "10nF" H 10525 5350 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10538 5300 30  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W2.5_P5" H 10538 5300 30  0001 C CNN
 F 3 "" H 10500 5450 60  0000 C CNN
 	1    10500 5450
 	1    0    0    -1  
@@ -1108,7 +1108,7 @@ U 1 1 567935ED
 P 1150 6150
 F 0 "F1" H 1250 6200 50  0000 C CNN
 F 1 "FUSE" H 1050 6100 50  0000 C CNN
-F 2 "Fuse_Holders_and_Fuses:Fuseholder5x20_horiz_open_lateral_Type-II" H 1150 6150 60  0001 C CNN
+F 2 "Fuse_Holders_and_Fuses:Fuseholder5x20_horiz_SemiClosed_Casing10x25mm" H 1150 6150 60  0001 C CNN
 F 3 "" H 1150 6150 60  0000 C CNN
 	1    1150 6150
 	0    1    1    0   
@@ -1130,7 +1130,7 @@ U 1 1 567935FB
 P 1550 6550
 F 0 "C2" H 1575 6650 50  0000 L CNN
 F 1 "10nF" H 1575 6450 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 1588 6400 30  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W2.5_P5" H 1588 6400 30  0001 C CNN
 F 3 "" H 1550 6550 60  0000 C CNN
 	1    1550 6550
 	1    0    0    -1  
