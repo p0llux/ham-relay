@@ -20,12 +20,15 @@ main (void)
   systick_init ();
   tx_init ();
   tone_init ();
+  roger_beep_init ();
   call_init ();
 
   call_transmit_delay (5);
 
   while (1) {
     if (!tx_is_enabled ()) {
+      roger_beep_transmit_if_needed ();
+
       call_transmit_if_needed ();
     }
 

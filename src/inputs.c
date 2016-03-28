@@ -1,8 +1,12 @@
 #include <ham-relay.h>
 
+static volatile bool tx_enabled;
+
 void
 inputs_init (void)
 {
+  tx_enabled = false;
+
   /* RXE */
   Chip_IOCON_PinMuxSet (LPC_IOCON, RXE_PIO, RXE_CONFIG);
   Chip_GPIO_SetPinDIRInput (LPC_GPIO, RXE_PORT, RXE_PIN);
@@ -40,14 +44,16 @@ pio1_handler (void)
 void
 pio2_handler (void)
 {
-  static bool tx_enabled = false;
-
   Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
 
   if (Chip_GPIO_GetPinState (LPC_GPIO, RXE_PORT, RXE_PIN)) {
     tx_disable ();
     tx_enabled = false;
+
+    roger_beep_start_timer ();
   } else if (!tx_enabled) {
+    roger_beep_stop_timer ();
+
     tx_enable ();
     tx_enabled = true;
   }

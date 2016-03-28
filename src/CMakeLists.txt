@@ -16,6 +16,7 @@ set (SRC
 	inputs.c
 	main.c
 	morse.c
+	roger-beep.c
 	systick.c
 	tone.c
 	tx.c

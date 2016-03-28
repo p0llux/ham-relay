@@ -48,4 +48,7 @@
 #define CALL_STRING         "ON0LBN"
 #define CALL_POST_DELAY_MS  100
 
+#define ROGER_BEEP_DELAY_MS    250
+#define ROGER_BEEP_DURATION_MS 250
+
 #endif /* __HAVE_CONFIG_H */
