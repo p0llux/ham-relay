@@ -1,9 +1,5 @@
 #include <ham-relay.h>
 
-static void generate_1khz (void);
-
-static volatile bool send_code = false;
-
 int
 main (void)
 {
@@ -33,19 +29,13 @@ main (void)
   systick_init ();
   tx_init ();
   tone_init ();
+  call_init ();
+
+  call_transmit_delay (5);
 
   while (1) {
-    if (send_code) {
-      morse_send ("ON0LBN", 6);
-      NVIC_DisableIRQ (EINT2_IRQn);
-      send_code = false;
-      NVIC_EnableIRQ (EINT2_IRQn);
-    }
 
-    //volatile int i;
-
-
-    //for (i = 0; i < (0x80000 * 6); i++);
+    call_transmit_if_needed ();
 
     __WFI ();
   }
@@ -57,5 +47,5 @@ void
 pio2_handler (void)
 {
   Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-  send_code = true;
+  call_force_transmit ();
 }

@@ -12,6 +12,7 @@ set_property (SOURCE main.c PROPERTY COMPILE_DEFINITIONS
 
 
 set (SRC
+	call.c
 	main.c
 	morse.c
 	systick.c

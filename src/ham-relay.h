@@ -8,6 +8,7 @@
 
 #include <config.h>
 
+#include <call.h>
 #include <morse.h>
 #include <systick.h>
 #include <tone.h>
