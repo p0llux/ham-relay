@@ -40,6 +40,7 @@ tx_disable (void)
 
     if (tx_usage == 0) {
       Chip_GPIO_SetPinState (LPC_GPIO, TXE_PORT, TXE_PIN, false);
+      call_transmit_delay (CALL_DELAY_AFTER_TX);
     }
   }
 
@@ -49,7 +50,25 @@ tx_disable (void)
 }
 
 bool
+tx_is_enabled (void)
+{
+  bool ret;
+
+  __disable_irq ();
+  ret = (tx_usage > 0);
+  __enable_irq ();
+
+  return ret;
+}
+
+bool
 tx_is_ready (void)
 {
-  return ((gSysTicks - tx_enable_tick) > TX_READY_DELAY_MS);
+  bool ret;
+
+  __disable_irq ();
+  ret = ((gSysTicks - tx_enable_tick) > TX_READY_DELAY_MS);
+  __enable_irq ();
+
+  return ret;
 }

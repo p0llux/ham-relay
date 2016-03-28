@@ -25,7 +25,9 @@ main (void)
   call_transmit_delay (5);
 
   while (1) {
-    call_transmit_if_needed ();
+    if (!tx_is_enabled ()) {
+      call_transmit_if_needed ();
+    }
 
     __WFI ();
   }
