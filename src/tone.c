@@ -41,7 +41,7 @@ tone_enable_1khz (uint32_t duration_ms)
   Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, false);
   Chip_GPIO_SetPinState (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN, false);
 
-  while (gSysTicks < (start_systick + 1 + (duration_ms / 10)));
+  while (gSysTicks < (start_systick + duration_ms));
 
   Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, true);
   Chip_GPIO_SetPinState (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN, true);

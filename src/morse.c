@@ -80,8 +80,7 @@ do_pause (uint32_t duration_ms)
   uint32_t start_systick;
 
   start_systick = gSysTicks;
-  while (gSysTicks == start_systick);
-  while (gSysTicks < (start_systick + 1 + (duration_ms / 10)));
+  while (gSysTicks < (start_systick + duration_ms));
 }
 
 static void

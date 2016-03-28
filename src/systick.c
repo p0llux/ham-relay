@@ -6,7 +6,7 @@ volatile uint32_t gSysTicks = 0;
 void
 systick_init (void)
 {
-  SysTick_Config (SystemCoreClock / 100);
+  SysTick_Config (SystemCoreClock / 1000);
 }
 
 void
@@ -14,7 +14,7 @@ systick_delay (uint32_t delay_ms)
 {
   uint32_t t_start = gSysTicks;
 
-  while ((gSysTicks - t_start) < (delay_ms / 10));
+  while ((gSysTicks - t_start) < delay_ms);
 }
 
 void
