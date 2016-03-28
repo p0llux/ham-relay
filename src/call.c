@@ -30,7 +30,11 @@ call_transmit_if_needed (void)
 
   if (transmit_call) {
     DBG (DBG_LEVEL_INFO, "Transmitting station ID (%s)", CALL_STRING);
+    tx_enable ();
+    while (!tx_is_ready ());
     morse_send (CALL_STRING, strlen (CALL_STRING));
+    systick_delay (CALL_POST_DELAY_MS);
+    tx_disable ();
 
     transmit_call = false;
 

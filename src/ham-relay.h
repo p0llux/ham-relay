@@ -9,6 +9,7 @@
 #include <config.h>
 
 #include <call.h>
+#include <inputs.h>
 #include <morse.h>
 #include <systick.h>
 #include <tone.h>

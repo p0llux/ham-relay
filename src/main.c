@@ -15,16 +15,7 @@ main (void)
   DBG (DBG_LEVEL_INFO, "Compiled " __DATE__ " at " __TIME__ " on " __BUILD_HOSTNAME__ " using GCC " __VERSION__ " (%d.%d-%d)", __CS_SOURCERYGXX_MAJ__, __CS_SOURCERYGXX_MIN__, __CS_SOURCERYGXX_REV__);
   DBG (DBG_LEVEL_INFO, "MCU running at %d MHz", SystemCoreClock / 1000000);
 
-  /* configure input */
-  Chip_IOCON_PinMuxSet (LPC_IOCON, RXE_PIO, (IOCON_FUNC0 | IOCON_MODE_PULLUP | IOCON_DIGMODE_EN));
-  Chip_GPIO_SetPinDIRInput (LPC_GPIO, RXE_PORT, RXE_PIN);
-
-  Chip_GPIO_SetPinModeEdge (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-  Chip_GPIO_SetEdgeModeSingle (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-  Chip_GPIO_SetModeLow (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-
-  Chip_GPIO_EnableInt (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-  NVIC_EnableIRQ (EINT2_IRQn);
+  inputs_init ();
 
   systick_init ();
   tx_init ();
@@ -34,18 +25,10 @@ main (void)
   call_transmit_delay (5);
 
   while (1) {
-
     call_transmit_if_needed ();
 
     __WFI ();
   }
 
   return 0;
-}
-
-void
-pio2_handler (void)
-{
-  Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
-  call_force_transmit ();
 }
