@@ -44,8 +44,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 2
 Title "Logique relais"
-Date "2016-02-14"
-Rev "6"
+Date "2016-04-08"
+Rev "7"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -174,9 +174,11 @@ Wire Wire Line
 Connection ~ 3150 2100
 Connection ~ 3550 2100
 $Comp
-L POT RV1
+L POT-RESCUE-ham-relay RV1
 U 1 1 5677F138
 P 4400 2350
+AR Path="/5677F138" Ref="RV1"  Part="1" 
+AR Path="/5677D530/5677F138" Ref="RV1"  Part="1" 
 F 0 "RV1" H 4400 2250 50  0000 C CNN
 F 1 "10k" H 4400 2350 50  0000 C CNN
 F 2 "Potentiometres:POT93YB" H 4400 2350 60  0001 C CNN
@@ -238,7 +240,7 @@ L R R27
 U 1 1 5677F15D
 P 5600 2900
 F 0 "R27" V 5680 2900 50  0000 C CNN
-F 1 "220k" V 5600 2900 50  0000 C CNN
+F 1 "680k" V 5600 2900 50  0000 C CNN
 F 2 "resistors:Resistor_Horizontal_RM08mm" V 5530 2900 30  0001 C CNN
 F 3 "" H 5600 2900 30  0000 C CNN
 	1    5600 2900
@@ -281,9 +283,11 @@ Connection ~ 6000 2250
 Wire Wire Line
 	3950 3350 4400 3350
 $Comp
-L POT RV2
+L POT-RESCUE-ham-relay RV2
 U 1 1 5677F179
 P 4400 3600
+AR Path="/5677F179" Ref="RV2"  Part="1" 
+AR Path="/5677D530/5677F179" Ref="RV2"  Part="1" 
 F 0 "RV2" H 4400 3500 50  0000 C CNN
 F 1 "1k" H 4400 3600 50  0000 C CNN
 F 2 "Potentiometres:POT93YA" H 4400 3600 60  0001 C CNN
@@ -333,7 +337,7 @@ L R R28
 U 1 1 5677F196
 P 5600 4150
 F 0 "R28" V 5680 4150 50  0000 C CNN
-F 1 "220k" V 5600 4150 50  0000 C CNN
+F 1 "330k" V 5600 4150 50  0000 C CNN
 F 2 "resistors:Resistor_Horizontal_RM08mm" V 5530 4150 30  0001 C CNN
 F 3 "" H 5600 4150 30  0000 C CNN
 	1    5600 4150
