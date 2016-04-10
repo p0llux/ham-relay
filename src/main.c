@@ -29,6 +29,7 @@ main (void)
   DBG (DBG_LEVEL_INFO, "Compiled " __DATE__ " at " __TIME__ " on " __BUILD_HOSTNAME__ " using GCC " __VERSION__ " (%d.%d-%d)", __CS_SOURCERYGXX_MAJ__, __CS_SOURCERYGXX_MIN__, __CS_SOURCERYGXX_REV__);
   DBG (DBG_LEVEL_INFO, "MCU running at %d MHz", SystemCoreClock / 1000000);
 
+  status_init ();
   systick_init ();
   tx_init ();
   tone_init ();
@@ -36,6 +37,8 @@ main (void)
   call_init ();
 
   inputs_init ();
+
+  status_set_pattern (STATUS_PATTERN_OK);
 
   call_transmit_delay (5);
 

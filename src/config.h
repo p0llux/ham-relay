@@ -49,4 +49,7 @@
 
 #define WDT_TIMEOUT_SEC        45
 
+#define STATUS_PATTERN_OK      0xFEFFFFFF
+#define STATUS_PATTERN_EXT     0x0000FFFF
+
 #endif /* __HAVE_CONFIG_H */

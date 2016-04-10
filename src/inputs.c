@@ -66,10 +66,12 @@ pio0_handler (void)
     static volatile bool ext_enabled = false;
 
     if (Chip_GPIO_GetPinState (LPC_GPIO, EXT_PORT, EXT_PIN)) {
+      status_set_pattern (STATUS_PATTERN_OK);
       tone_set_frequency (TONE_DEFAULT_HZ);
 
       ext_enabled = false;
     } else if (!ext_enabled) {
+      status_set_pattern (STATUS_PATTERN_EXT);
       tone_set_frequency (TONE_EXT_HZ);
 
       ext_enabled = true;

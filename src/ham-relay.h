@@ -12,6 +12,7 @@
 #include <inputs.h>
 #include <morse.h>
 #include <roger-beep.h>
+#include <status.h>
 #include <systick.h>
 #include <tone.h>
 #include <tx.h>
