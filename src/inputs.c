@@ -52,11 +52,8 @@ pio0_handler (void)
     } else if (!tx_enabled) {
       roger_beep_stop_timer ();
 
-      if (Chip_GPIO_GetPinState (LPC_GPIO, EXT_PORT, EXT_PIN)) {
-        tone_set_frequency (TONE_DEFAULT_HZ);
-      } else {
-        tone_set_frequency (TONE_EXT_HZ);
-      }
+      tx_enable ();
+      tx_enabled = true;
     }
 
     Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
