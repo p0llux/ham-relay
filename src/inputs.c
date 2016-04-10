@@ -1,12 +1,8 @@
 #include <ham-relay.h>
 
-static volatile bool tx_enabled;
-
 void
 inputs_init (void)
 {
-  tx_enabled = false;
-
   /* RXE */
   Chip_IOCON_PinMuxSet (LPC_IOCON, RXE_PIO, RXE_CONFIG);
   Chip_GPIO_SetPinDIRInput (LPC_GPIO, RXE_PORT, RXE_PIN);
@@ -32,44 +28,53 @@ inputs_init (void)
   NVIC_EnableIRQ (EINT0_IRQn);
 }
 
+bool
+input_is_rxe_enabled (void)
+{
+  return !Chip_GPIO_GetPinState (LPC_GPIO, RXE_PORT, RXE_PIN);
+}
+
 void
 pio0_handler (void)
 {
-  static uint32_t last_tx_enable_tick;
   uint32_t status;
 
   status = Chip_GPIO_GetRawInts (LPC_GPIO, 0);
 
   if (status & (1 << RXE_PIN)) {
-    Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
+    static volatile bool tx_enabled = false;
 
     if (Chip_GPIO_GetPinState (LPC_GPIO, RXE_PORT, RXE_PIN)) {
+      roger_beep_start_timer ();
+
       tx_disable ();
       tx_enabled = false;
+    } else if (!tx_enabled) {
+      roger_beep_stop_timer ();
 
-      roger_beep_start_timer ();
-    } else {
-      if (HAS_TIMED_OUT (last_tx_enable_tick, 30)) {
-	if (!tx_enabled) {
-	  roger_beep_stop_timer ();
-
-	  tx_enable ();
-	  tx_enable ();
-	  tx_enabled = true;
-	  last_tx_enable_tick = gSysTicks;
-	}
+      if (Chip_GPIO_GetPinState (LPC_GPIO, EXT_PORT, EXT_PIN)) {
+        tone_set_frequency (TONE_DEFAULT_HZ);
+      } else {
+        tone_set_frequency (TONE_EXT_HZ);
       }
     }
+
+    Chip_GPIO_ClearInts (LPC_GPIO, RXE_PORT, (1 << RXE_PIN));
   }
 
   if (status & (1 << EXT_PIN)) {
-    Chip_GPIO_ClearInts (LPC_GPIO, EXT_PORT, (1 << EXT_PIN));
-    //call_force_transmit ();
+    static volatile bool ext_enabled = false;
 
     if (Chip_GPIO_GetPinState (LPC_GPIO, EXT_PORT, EXT_PIN)) {
       tone_set_frequency (TONE_DEFAULT_HZ);
-    } else {
+
+      ext_enabled = false;
+    } else if (!ext_enabled) {
       tone_set_frequency (TONE_EXT_HZ);
+
+      ext_enabled = true;
     }
+
+    Chip_GPIO_ClearInts (LPC_GPIO, EXT_PORT, (1 << EXT_PIN));
   }
 }

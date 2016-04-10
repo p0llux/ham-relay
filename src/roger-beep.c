@@ -21,6 +21,8 @@ roger_beep_init (void)
 void
 roger_beep_start_timer (void)
 {
+  tx_enable ();
+
   Chip_TIMER_Reset (LPC_TIMER16_1);
 
   NVIC_DisableIRQ (TIMER_16_1_IRQn);
@@ -34,6 +36,10 @@ roger_beep_start_timer (void)
 void
 roger_beep_stop_timer (void)
 {
+  if ((LPC_TIMER16_1->TCR & TIMER_ENABLE) != 0) {
+    tx_disable ();
+  }
+
   Chip_TIMER_Disable (LPC_TIMER16_1);
 }
 
@@ -45,9 +51,7 @@ roger_beep_transmit_if_needed (void)
   if (transmit_roger_beep) {
     DBG (DBG_LEVEL_INFO, "Roger beep");
 
-    tx_enable ();
     tone_enable (ROGER_BEEP_DURATION_MS);
-    tx_disable ();
 
     transmit_roger_beep = false;
 

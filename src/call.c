@@ -31,8 +31,10 @@ call_transmit_if_needed (void)
   NVIC_DisableIRQ (TIMER_32_0_IRQn);
 
   if (transmit_call) {
-    DBG (DBG_LEVEL_INFO, "Transmitting station ID (%s)", CALL_STRING);
     tx_enable ();
+
+    DBG (DBG_LEVEL_INFO, "Transmitting station ID (%s)", CALL_STRING);
+
     while (!tx_is_ready ());
     morse_send (CALL_STRING, strlen (CALL_STRING));
     systick_delay (CALL_POST_DELAY_MS);

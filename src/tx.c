@@ -17,15 +17,13 @@ void
 tx_enable (void)
 {
   __disable_irq ();
+  tx_usage++;
+  __enable_irq ();
 
-  if (tx_usage == 0) {
+  if (tx_usage == 1) {
     Chip_GPIO_SetPinState (LPC_GPIO, TXE_PORT, TXE_PIN, true);
     tx_enable_tick = gSysTicks;
   }
-
-  tx_usage++;
-
-  __enable_irq ();
 
   DBG (DBG_LEVEL_DEBUG, "TX usage = %d", tx_usage);
 }
@@ -33,19 +31,24 @@ tx_enable (void)
 void
 tx_disable (void)
 {
-  __disable_irq ();
+  bool changed;
 
+  __disable_irq ();
   if (tx_usage > 0) {
     tx_usage--;
+    changed = true;
+  } else {
+    changed = false;
+  }
+  __enable_irq ();
 
+  if (changed) {
     if (tx_usage == 0) {
       Chip_GPIO_SetPinState (LPC_GPIO, TXE_PORT, TXE_PIN, false);
     }
+
+    DBG (DBG_LEVEL_DEBUG, "TX usage = %d", tx_usage);
   }
-
-  __enable_irq ();
-
-  DBG (DBG_LEVEL_DEBUG, "TX usage = %d", tx_usage);
 }
 
 bool

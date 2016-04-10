@@ -1,5 +1,7 @@
 #include <ham-relay.h>
 
+extern void SystemInit (void);
+
 int
 main (void)
 {
@@ -28,7 +30,7 @@ main (void)
   while (1) {
     roger_beep_transmit_if_needed ();
 
-    if (call_transmit_if_needed ()) {
+    if (call_transmit_if_needed () && !input_is_rxe_enabled ()) {
       tx_disable ();
     }
 

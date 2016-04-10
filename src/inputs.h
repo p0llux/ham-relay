@@ -3,4 +3,6 @@
 
 void inputs_init (void);
 
+bool input_is_rxe_enabled (void);
+
 #endif /* __HAVE_INPUTS_HEADER */
