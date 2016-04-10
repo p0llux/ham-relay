@@ -48,7 +48,7 @@ __attribute__ ((section (".text.lpc.init")))
 INLINE void
 SystemInit (void)
 {
-  SystemSetupClocking ();
+  //SystemSetupClocking ();
 
   SystemCoreClockUpdate ();
 
