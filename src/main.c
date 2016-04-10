@@ -12,6 +12,18 @@ main (void)
   debug_set_level (DEBUG_LEVEL);
 #endif
 
+  /* configure watchdog */
+  Chip_WWDT_Init (LPC_WWDT);
+  Chip_SYSCTL_PowerUp (SYSCTL_POWERDOWN_WDTOSC_PD);
+  Chip_Clock_SetWDTOSC (WDTLFO_OSC_1_05, 42);
+  Chip_Clock_SetWDTClockSource (SYSCTL_WDTCLKSRC_WDTOSC, 1);
+  Chip_WWDT_SetOption(LPC_WWDT, WWDT_WDMOD_WDRESET);
+
+  Chip_WWDT_SetTimeOut (LPC_WWDT, (Chip_Clock_GetWDTOSCRate() / 4) * WDT_TIMEOUT_SEC);
+
+  Chip_WWDT_ClearStatusFlag (LPC_WWDT, WWDT_WDMOD_WDTOF);
+  Chip_WWDT_Start (LPC_WWDT);
+
   DBG_NEWLINE (DBG_LEVEL_INFO);
   DBG (DBG_LEVEL_INFO, "HAM relay firmware v" VERSION_STR " (" __GIT_SHA1__ ")");
   DBG (DBG_LEVEL_INFO, "Compiled " __DATE__ " at " __TIME__ " on " __BUILD_HOSTNAME__ " using GCC " __VERSION__ " (%d.%d-%d)", __CS_SOURCERYGXX_MAJ__, __CS_SOURCERYGXX_MIN__, __CS_SOURCERYGXX_REV__);
@@ -30,8 +42,12 @@ main (void)
   while (1) {
     roger_beep_transmit_if_needed ();
 
-    if (call_transmit_if_needed () && !input_is_rxe_enabled ()) {
-      tx_disable ();
+    if (call_transmit_if_needed ()) {
+      if (!input_is_rxe_enabled ()) {
+        tx_disable ();
+      }
+
+      Chip_WWDT_Feed (LPC_WWDT);
     }
 
     __WFI ();

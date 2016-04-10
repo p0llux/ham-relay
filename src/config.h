@@ -47,4 +47,6 @@
 #define ROGER_BEEP_DELAY_MS    440
 #define ROGER_BEEP_DURATION_MS 250
 
+#define WDT_TIMEOUT_SEC        45
+
 #endif /* __HAVE_CONFIG_H */
