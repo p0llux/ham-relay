@@ -3,7 +3,7 @@
 
 void call_init (void);
 
-void call_transmit_if_needed (void);
+bool call_transmit_if_needed (void);
 void call_force_transmit (void);
 
 void call_transmit_delay (uint32_t seconds);

@@ -23,9 +23,11 @@ call_init (void)
   NVIC_EnableIRQ (TIMER_32_0_IRQn);
 }
 
-void
+bool
 call_transmit_if_needed (void)
 {
+  bool sent;
+
   NVIC_DisableIRQ (TIMER_32_0_IRQn);
 
   if (transmit_call) {
@@ -42,9 +44,15 @@ call_transmit_if_needed (void)
     Chip_TIMER_ClearMatch(LPC_TIMER32_0, 0);
     Chip_TIMER_SetMatch (LPC_TIMER32_0, 0, CALL_INTERVAL_SEC);
     NVIC_ClearPendingIRQ (TIMER_32_0_IRQn);
+
+    sent = true;
+  } else {
+    sent = false;
   }
 
   NVIC_EnableIRQ (TIMER_32_0_IRQn);
+
+  return sent;
 }
 
 void
@@ -75,8 +83,8 @@ call_transmit_delay (uint32_t seconds)
 void
 timer32_0_handler (void)
 {
-  if (Chip_TIMER_MatchPending(LPC_TIMER32_0, 0)) {
-    Chip_TIMER_ClearMatch(LPC_TIMER32_0, 0);
+  if (Chip_TIMER_MatchPending (LPC_TIMER32_0, 0)) {
+    Chip_TIMER_ClearMatch (LPC_TIMER32_0, 0);
 
     transmit_call = true;
   }
