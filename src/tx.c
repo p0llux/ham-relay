@@ -40,7 +40,6 @@ tx_disable (void)
 
     if (tx_usage == 0) {
       Chip_GPIO_SetPinState (LPC_GPIO, TXE_PORT, TXE_PIN, false);
-      call_transmit_delay (CALL_DELAY_AFTER_TX);
     }
   }
 

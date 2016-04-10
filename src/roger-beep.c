@@ -51,6 +51,7 @@ roger_beep_transmit_if_needed (void)
 
     transmit_roger_beep = false;
 
+    call_transmit_delay (CALL_DELAY_AFTER_TX);
     Chip_TIMER_Disable (LPC_TIMER16_1);
   }
 
