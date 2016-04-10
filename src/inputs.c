@@ -45,14 +45,17 @@ pio0_handler (void)
     static volatile bool tx_enabled = false;
 
     if (Chip_GPIO_GetPinState (LPC_GPIO, RXE_PORT, RXE_PIN)) {
+      tx_set_state (TX_ROGER);
+      tx_clear_state (TX_PTT);
+
       roger_beep_start_timer ();
 
-      tx_disable ();
       tx_enabled = false;
     } else if (!tx_enabled) {
+      tx_set_state (TX_PTT);
+
       roger_beep_stop_timer ();
 
-      tx_enable ();
       tx_enabled = true;
     }
 

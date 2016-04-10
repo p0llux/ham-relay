@@ -31,21 +31,17 @@ call_transmit_if_needed (void)
   NVIC_DisableIRQ (TIMER_32_0_IRQn);
 
   if (transmit_call) {
-    tx_enable ();
+    tx_set_state (TX_CALL);
 
     DBG (DBG_LEVEL_INFO, "Transmitting station ID (%s)", CALL_STRING);
 
-    while (!tx_is_ready ());
+    systick_delay (TX_READY_DELAY_MS);
     morse_send (CALL_STRING, strlen (CALL_STRING));
     systick_delay (CALL_POST_DELAY_MS);
-    tx_disable ();
 
-    transmit_call = false;
+    tx_clear_state (TX_CALL);
 
-    Chip_TIMER_Reset (LPC_TIMER32_0);
-    Chip_TIMER_ClearMatch(LPC_TIMER32_0, 0);
-    Chip_TIMER_SetMatch (LPC_TIMER32_0, 0, CALL_INTERVAL_SEC);
-    NVIC_ClearPendingIRQ (TIMER_32_0_IRQn);
+    call_transmit_delay (CALL_INTERVAL_SEC);
 
     sent = true;
   } else {

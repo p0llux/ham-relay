@@ -17,4 +17,5 @@
 #include <tone.h>
 #include <tx.h>
 
+extern bool waiting_for_call;
 #endif /* __HAVE_HAM_RELAY_H */

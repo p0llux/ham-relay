@@ -43,13 +43,11 @@ main (void)
   call_transmit_delay (5);
 
   while (1) {
-    roger_beep_transmit_if_needed ();
+    if (roger_beep_transmit_if_needed ()) {
+      call_transmit_delay (CALL_DELAY_AFTER_TX);
+    }
 
     if (call_transmit_if_needed ()) {
-      if (!input_is_rxe_enabled ()) {
-        tx_disable ();
-      }
-
       Chip_WWDT_Feed (LPC_WWDT);
     }
 

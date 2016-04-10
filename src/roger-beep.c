@@ -21,7 +21,11 @@ roger_beep_init (void)
 void
 roger_beep_start_timer (void)
 {
-  tx_enable ();
+  if ((LPC_TIMER16_1->TCR & TIMER_ENABLE) != 0) {
+    tx_clear_state (TX_ROGER);
+  }
+
+  tx_set_state (TX_ROGER);
 
   Chip_TIMER_Reset (LPC_TIMER16_1);
 
@@ -37,15 +41,17 @@ void
 roger_beep_stop_timer (void)
 {
   if ((LPC_TIMER16_1->TCR & TIMER_ENABLE) != 0) {
-    tx_disable ();
+    tx_clear_state (TX_ROGER);
   }
 
   Chip_TIMER_Disable (LPC_TIMER16_1);
 }
 
-void
+bool
 roger_beep_transmit_if_needed (void)
 {
+  bool sent;
+
   NVIC_DisableIRQ (TIMER_16_1_IRQn);
 
   if (transmit_roger_beep) {
@@ -53,13 +59,22 @@ roger_beep_transmit_if_needed (void)
 
     tone_enable (ROGER_BEEP_DURATION_MS);
 
+    tx_set_state (TX_CALL);
+    tx_clear_state (TX_ROGER);
+
     transmit_roger_beep = false;
 
     call_transmit_delay (CALL_DELAY_AFTER_TX);
     Chip_TIMER_Disable (LPC_TIMER16_1);
+
+    sent = true;
+  } else {
+    sent = false;
   }
 
   NVIC_EnableIRQ (TIMER_16_1_IRQn);
+
+  return sent;
 }
 
 void
