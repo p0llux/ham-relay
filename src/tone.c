@@ -6,12 +6,7 @@ tone_init (void)
   /* configure TONE_SW pin */
   Chip_IOCON_PinMuxSet (LPC_IOCON, TONE_SW_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
   Chip_GPIO_SetPinDIROutput (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN);
-  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, true);
-
-  /* configure TONE LED pin */
-  Chip_IOCON_PinMuxSet (LPC_IOCON, LED_TONE_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
-  Chip_GPIO_SetPinDIROutput (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN);
-  Chip_GPIO_SetPinState (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN, true);
+  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, false);
 
   /* configure TONE pin */
   Chip_IOCON_PinMuxSet (LPC_IOCON, TONE_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
@@ -44,13 +39,11 @@ tone_set_frequency (uint16_t frequency)
 void
 tone_enable (uint32_t duration_ms)
 {
-  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, false);
-  Chip_GPIO_SetPinState (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN, false);
+  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, true);
 
   systick_delay (duration_ms);
 
-  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, true);
-  Chip_GPIO_SetPinState (LPC_GPIO, LED_TONE_PORT, LED_TONE_PIN, true);
+  Chip_GPIO_SetPinState (LPC_GPIO, TONE_SW_PORT, TONE_SW_PIN, false);
 }
 
 void
