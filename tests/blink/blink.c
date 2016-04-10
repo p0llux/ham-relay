@@ -1,20 +1,20 @@
 #include <chip.h>
 #include <debug.h>
 
-#define LED_STATUS_PIO   IOCON_PIO3_0
-#define LED_STATUS_PORT  3
-#define LED_STATUS_PIN   0
+#define LED_STATUS_PIO   IOCON_PIO0_5
+#define LED_STATUS_PORT  0
+#define LED_STATUS_PIN   5
 
-static const blink_mask = 0xFEFEFFFF;
+static const blink_mask = 0xFFFF0000;// 0x3FFFFFFF;
 
 void
 main (void)
 {
   SystemInit ();
 
-  Chip_IOCON_PinMuxSet (LPC_IOCON, LED_STATUS_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
+  Chip_IOCON_PinMuxSet (LPC_IOCON, LED_STATUS_PIO, IOCON_MODE_PULLUP | IOCON_MODE_INACT | IOCON_FUNC0);
   Chip_GPIO_SetPinDIROutput (LPC_GPIO, LED_STATUS_PORT, LED_STATUS_PIN);
-  Chip_GPIO_SetPinState (LPC_GPIO, LED_STATUS_PORT, LED_STATUS_PIN, false);
+  Chip_GPIO_SetPinState (LPC_GPIO, LED_STATUS_PORT, LED_STATUS_PIN, true);
 
   Chip_TIMER_Init (LPC_TIMER32_0);
   Chip_TIMER_Reset (LPC_TIMER32_0);
