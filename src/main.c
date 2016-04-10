@@ -5,6 +5,10 @@ extern void SystemInit (void);
 int
 main (void)
 {
+  uint32_t last_call_sent_tick;
+
+  last_call_sent_tick = 0;
+
   SystemInit ();
 
   debug_init ();
@@ -48,7 +52,14 @@ main (void)
     }
 
     if (call_transmit_if_needed ()) {
+      last_call_sent_tick = gSysTicks;
+
       Chip_WWDT_Feed (LPC_WWDT);
+    }
+
+    if (HAS_TIMED_OUT (last_call_sent_tick, CALL_INTERVAL_SEC * 1000)) {
+      call_force_transmit ();
+      continue;
     }
 
     __WFI ();

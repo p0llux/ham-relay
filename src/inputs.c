@@ -53,7 +53,9 @@ pio0_handler (void)
       tx_enabled = false;
     } else if (!tx_enabled) {
       tx_set_state (TX_PTT);
+      tx_clear_state (TX_CALL);
 
+      call_transmit_delay (CALL_INTERVAL_SEC);
       roger_beep_stop_timer ();
 
       tx_enabled = true;

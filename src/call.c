@@ -71,7 +71,7 @@ call_transmit_delay (uint32_t seconds)
   transmit_call = false;
 
   Chip_TIMER_Reset (LPC_TIMER32_0);
-  Chip_TIMER_ClearMatch(LPC_TIMER32_0, 0);
+  Chip_TIMER_ClearMatch (LPC_TIMER32_0, 0);
   Chip_TIMER_SetMatch (LPC_TIMER32_0, 0, seconds);
   NVIC_ClearPendingIRQ (TIMER_32_0_IRQn);
 

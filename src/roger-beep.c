@@ -21,10 +21,6 @@ roger_beep_init (void)
 void
 roger_beep_start_timer (void)
 {
-  if ((LPC_TIMER16_1->TCR & TIMER_ENABLE) != 0) {
-    tx_clear_state (TX_ROGER);
-  }
-
   tx_set_state (TX_ROGER);
 
   Chip_TIMER_Reset (LPC_TIMER16_1);
@@ -64,7 +60,6 @@ roger_beep_transmit_if_needed (void)
 
     transmit_roger_beep = false;
 
-    call_transmit_delay (CALL_DELAY_AFTER_TX);
     Chip_TIMER_Disable (LPC_TIMER16_1);
 
     sent = true;

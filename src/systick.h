@@ -1,7 +1,7 @@
 #ifndef __HAVE_SYSTICK_H
 #define __HAVE_SYSTICK_H
 
-#define HAS_TIMED_OUT(tick_start,timeout_ms) ((gSysTicks - tick_start) > (timeout_ms / 10))
+#define HAS_TIMED_OUT(tick_start,timeout_ms) ((gSysTicks - tick_start) > timeout_ms)
 
 extern volatile uint32_t gSysTicks;
 

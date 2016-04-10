@@ -5,14 +5,14 @@ static uint32_t blink_mask = 0;
 void
 status_init (void)
 {
-  Chip_IOCON_PinMuxSet (LPC_IOCON, LED_STATUS_PIO, IOCON_MODE_INACT | IOCON_FUNC0);
+  Chip_IOCON_PinMuxSet (LPC_IOCON, LED_STATUS_PIO, IOCON_MODE_INACT | IOCON_FUNC1);
   Chip_GPIO_SetPinDIROutput (LPC_GPIO, LED_STATUS_PORT, LED_STATUS_PIN);
   Chip_GPIO_SetPinState (LPC_GPIO, LED_STATUS_PORT, LED_STATUS_PIN, false);
 
   Chip_TIMER_Init (LPC_TIMER32_1);
   Chip_TIMER_Reset (LPC_TIMER32_1);
   Chip_TIMER_MatchEnableInt (LPC_TIMER32_1, 1);
-  Chip_TIMER_SetMatch (LPC_TIMER32_1, 1, (Chip_Clock_GetSystemClockRate () / (1 * 32)));
+  Chip_TIMER_SetMatch (LPC_TIMER32_1, 1, ((Chip_Clock_GetSystemClockRate () * 2) / 32));
   Chip_TIMER_ResetOnMatchEnable (LPC_TIMER32_1, 1);
   Chip_TIMER_Enable (LPC_TIMER32_1);
 
